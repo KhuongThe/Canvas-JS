@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="game" width="1200px" height="600px" style="border: 1px solid blue"></canvas>
+</body>
+<script>
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255); //Tao mã màu random
+    }
+    function getRandomColor() {
+        let red = getRandomHex();
+        let blue = getRandomHex();
+        let yerlow = getRandomHex();
+        return "rgb(" + red + "," + blue + "," + yerlow + ")"; //ket hop tao mã màu rgb random
+    }
+    
+
+    
+
+    function Circle() {
+        this.x = Math.floor(Math.random() * window.innerWidth);
+        this.y = Math.floor(Math.random() * window.innerHeight);
+    }
+    
+
+    function creatCircle() {
+        let color = getRandomColor();
+        let radius = Math.floor(Math.random() * 100); //tao ban kinh ngau nhien
+        circle = new Circle();
+        let drawCircle = document.getElementById("game");
+        let ctx = drawCircle.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(circle.x, circle.y, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+    
+    setInterval(creatCircle,50);
+
+</script>
+
+</html>

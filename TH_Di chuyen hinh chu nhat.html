@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="game" width="800px" height="400px" style="border: 2px solid black"></canvas>
+</body>
+<script>
+    let XPosition = 20;
+    let YPosition = 80;
+    let width = 80;
+    let height = 120;
+    let topgame = 0;
+    let bottomgame = 400;
+    let time = 20;
+    let rectangle = document.getElementById("game");
+    let ctx = rectangle.getContext("2d");
+    // ctx.beginPath();
+    // ctx.fillStyle = "#ff0000";
+    // ctx.fillRect(XPosition, YPosition, width, height);
+
+    function drawRect() {
+        ctx.beginPath();
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(XPosition, YPosition, width, height);
+    }
+
+    let yDistance = 1;
+    function moveDownUp() {
+        ctx.clearRect(XPosition, YPosition, width, height);
+        let touchtop = YPosition < topgame;
+        let touchbottom = YPosition + height > bottomgame;
+        if (touchtop || touchbottom) {
+            yDistance = -yDistance;  //Dau tien tang dan đen 401, sau do giam dan xuong -1 thì -yDistance lai bang + 1
+
+        }
+        YPosition += yDistance;
+        drawRect();
+    }
+    setInterval(moveDownUp, time);
+    // function moveDown() {
+    //     ctx.clearRect(XPosition, YPosition, width, height);
+    //     if (YPosition + height <= 400) {
+    //         YPosition++;
+    //     }
+    //     drawRect();
+    // }
+    // setInterval(moveDown, 50);
+
+    // function moveUp() {
+    //     ctx.clearRect(XPosition, YPosition, width, height);
+    //     if (YPosition > 0) {
+    //         YPosition--;
+    //     }
+    //     drawRect();
+    // }
+    // // setInterval(moveUp, 50);
+
+
+</script>
+
+</html>

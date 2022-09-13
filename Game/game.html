@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    var myGameArea = {
+        canvas: document.createElement("canvas"),
+        start: function () {
+            // xác định độ rộng của vùng game
+            this.canvas.width = 480;
+
+            // xác định độ cao của vùng game
+            this.canvas.height = 270;
+
+            // nội dung bên trong của vùng không gian này là các thứ được vẽ từ đối tượng getContext("2d")
+            this.context = this.canvas.getContext("2d");
+
+            //Method start() tạo ra 1 <canvas> và chèn nó như childnode đầu tiên của <body>
+            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+
+            // hẹn giờ để chạy hàm updateGameArea() sau mỗi 20 ms/lần
+            this.interval = setInterval(updateGameArea, 20);
+        },
+        // hàm clear() để làm sạch canvas
+        clear: function () {
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+
+    // khai báo biến cho component
+
+    function component(width, height, color, x, y) {
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
+
+        // Trong hàm tạo của component khởi tạo 2 thuộc tính ```speedX``` và ```speedY```
+        this.speedX = 0;
+        this.speedY = 0;
+
+        // tạo hàm update() trong hàm tạo component() để update số liệu khi vẽ component
+        this.update = function () {
+            ctx = myGameArea.context;
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+        this.newPos = function () {
+            // toạ độ mới của khối hình bằng toạ độ cũ cộng với chỉ số tốc độ tương ứng
+            // toạ độ x mới bằng toạ độ x cũ cộng với speedX
+            this.x += this.speedX;
+            //toạ độ y mới bằng toạ độ y cũ cộng với speedY
+            this.y += this.speedY;
+        }
+    }
+
+    var myGamePiece;
+    function startGame() {
+
+        //Hàm startGame() gọi đến method start() của đối tượng myGameArea
+        myGameArea.start();
+
+        // khởi tạo component và set giá trị cho (độ rộng, chiều cao, màu, hoành độ x (khoảng cách của component tới biên trái của vùng game), tung độ y (khoảng cách của component tới biên phía trên của vùng game))
+
+        // gọi tới hàm component bên dưới và gán giá trị cho các thuộc tính bằng các đối số truyền vào
+        myGamePiece = new component(30, 30, "red", 10, 120);
+    }
+
+
+
+
+
+
+
+    var redGamePiece, blueGamePiece, yellowGamePiece;
+
+    function startGame() {
+        redGamePiece = new component(75, 75, "red", 10, 10);
+        yellowGamePiece = new component(75, 75, "yellow", 50, 60);
+        blueGamePiece = new component(75, 75, "blue", 10, 110);
+        myGameArea.start();
+    }
+
+    function updateGameArea() {
+        myGameArea.clear();
+        // trong hàm updateGameArea() thêm dòng lệnh để tăng tọa độ x lên 1px ở mỗi lần cập nhật
+        redGamePiece.x += 1;
+        yellowGamePiece.x += 1;
+        yellowGamePiece.y += 1;
+        blueGamePiece.x += 1;
+        blueGamePiece.y -= 1;
+        redGamePiece.update();
+        yellowGamePiece.update();
+        blueGamePiece.update();
+        // mỗi lần update Game ta sẽ gọi hàm newPos 1 lần để xác định lại vị trí của khối hình sau mỗi lần thay đổi.
+        myGamePiece.newPos();
+        myGamePiece.update();
+    }
+
+
+
+
+
+
+
+
+    function updateGameArea() {
+        myGameArea.clear();
+        // mỗi lần update Game ta sẽ gọi hàm newPos 1 lần để xác định lại vị trí của khối hình sau mỗi lần thay đổi.
+        myGamePiece.newPos();
+        myGamePiece.update();
+    }
+
+    // hàm chuyển động lên
+    function moveup() {
+        // mỗi khi di chuyển khối hình lên trên thì toạ độ y sẽ bị giảm đi 1, tương ứng với  việc speedY giảm đi 1.
+        myGamePiece.speedY -= 1;
+    }
+
+    // hàm chuyển động xuống
+    function movedown() {
+        // mỗi khi di chuyển khối hình xuống dưới thì toạ độ y sẽ tăng lên 1, tương ứng với  việc speedY tăng thêm 1.
+        myGamePiece.speedY += 1;
+    }
+
+    // hàm sang trái
+    function moveleft() {
+        // mỗi khi di chuyển khối hình sang trái thì toạ độ x sẽ giảm đi 1, tương ứng với  việc speedX giảm đi 1.
+        myGamePiece.speedX -= 1;
+    }
+
+    // hàm sang phải
+    function moveright() {
+        // mỗi khi di chuyển khối hình sang phải thì toạ độ x sẽ tăng lên 1, tương ứng với  việc speedX tăng lên 1.
+        myGamePiece.speedX += 1;
+    }
+    // hàm dừng chuyển động của khối hình
+    function stopMove() {
+        myGamePiece.speedX = 0;
+        myGamePiece.speedY = 0;
+    }
+
+
+
+
+
+
+    var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+        // bắt sự kiện keydown (nhấn xuống) của phím key
+        window.addEventListener('keydown', function (e) {
+        	// khi key nào đó được nhấn thì key của myGameArea = mã ASCII của phím key được nhấn
+            myGameArea.key = e.keyCode;
+        })
+        // bắt sự kiện keyup (nhả ra) của phím key
+        window.addEventListener('keyup', function (e) {
+        	// khi key nào đó được nhả ra sau khi nhấn thì key của myGameArea = false
+            myGameArea.key = false;
+        })
+    },
+    clear : function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+
+
+
+
+
+function updateGameArea() {
+    myGameArea.clear();
+    myGamePiece.speedX = 0;
+    myGamePiece.speedY = 0;
+
+    // nếu phím mũi tên trái (mã ASCII = 37) được nhấn, thì speedX = -1 (dịch trái 1 điểm ảnh)
+    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -1; }
+
+    // nếu phím mũi tên phải (mã ASCII = 39) được nhấn, thì speedX = 1 (dịch phải 1 điểm ảnh)
+    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 1; }
+
+    // nếu phím mũi tên lên (mã ASCII = 38) được nhấn, thì speedY = -1 (dịch lên 1 điểm ảnh)
+    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -1; }
+
+    // nếu phím mũi tên xuống (mã ASCII = 40) được nhấn, thì speedY = 1 (dịch xuống 1 điểm ảnh)
+    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 1; }
+    myGamePiece.newPos();
+    myGamePiece.update();
+}
+
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('keydown', function (e) {
+            // key cho myGameArea là số nhiều (keys) và được lưu dưới dạng mảng tên là keys
+            myGameArea.keys = (myGameArea.keys || []);
+            // bắt sự kiện keydown lần lượt cho từng phím và chuyển đổi giá trị của phần tử có keyCode tương ứng trong mảng keys
+            myGameArea.keys[e.keyCode] = true;
+        })
+        window.addEventListener('keyup', function (e) {
+            // bắt sự kiện keyup tương tự với keydown phía trên
+            myGameArea.keys[e.keyCode] = false;
+        })
+    },
+    clear : function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+ function updateGameArea() {
+    myGameArea.clear();
+    // cách khởi tạo chỉ số speedX và speedY và tăng giảm giá trị của chúng khi hàm updateGameArea được gọi hoàn toàn giống với điều chỉnh trái-phải, lên-xuống
+    myGamePiece.speedX = 0;
+    myGamePiece.speedY = 0;
+    if (myGameArea.keys && myGameArea.keys[37]) {myGamePiece.speedX = -1; }
+    if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 1; }
+    if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -1; }
+    if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 1; }
+    myGamePiece.newPos();
+    myGamePiece.update();
+}
+
+
+
+
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.canvas.style.cursor = "none"; //ẩn con trỏ gốc
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+
+        bắt sự kiện mousemove - đi qua của con trỏ
+        window.addEventListener('mousemove', function (e) {
+            // tọa độ x của component (tọa độ x mới của khối hình) được gán bằng tọa độ pageX của con trỏ
+            myGameArea.x = e.pageX;
+            // tọa độ y của component (tọa độ x mới của khối hình) được gán bằng tọa độ pageY của con trỏ
+            myGameArea.y = e.pageY;
+        })
+    },
+    clear : function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+
+
+
+
+
+function updateGameArea() {
+    myGameArea.clear();
+    if (myGameArea.x && myGameArea.y) {
+        myGamePiece.x = myGameArea.x;
+        myGamePiece.y = myGameArea.y;
+    }
+    myGamePiece.update();
+}
+
+
+</script>
+
+<button onmousedown="moveup()" onmouseup="stopMove()" ontouchstart="moveup()">UP</button>
+<button onmousedown="movedown()" onmouseup="stopMove()" ontouchstart="movedown()">DOWN</button>
+<button onmousedown="moveleft()" onmouseup="stopMove()" ontouchstart="moveleft()">LEFT</button>
+<button onmousedown="moveright()" onmouseup="stopMove()" ontouchstart="moveright()">RIGHT</button>
+
+</html>

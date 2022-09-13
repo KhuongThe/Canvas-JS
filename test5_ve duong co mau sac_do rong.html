@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Draw lines of various width</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('DemoCanvas');
+        if (canvas.getContext) {
+            var context = canvas.getContext("2d");
+            context.beginPath();
+            context.moveTo(50, 10);
+            context.lineTo(50, 200);
+            context.lineWidth = 5;
+            // set line color
+            context.strokeStyle = 'red';
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(100, 10);
+            context.lineTo(100, 200);
+            context.lineWidth = 5;
+            // set line color
+            context.strokeStyle = 'green';
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(150, 10);
+            context.lineTo(150, 200);
+            context.lineWidth = 5;
+            // set line color
+            context.strokeStyle = 'blue';
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(200, 10);
+            context.lineTo(200, 200);
+            context.lineWidth = 5;
+            // set line color
+            context.strokeStyle = 'pink';
+            context.stroke();
+        }
+    </script>
+</body>
+
+</html>

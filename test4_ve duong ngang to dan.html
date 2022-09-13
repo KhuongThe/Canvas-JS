@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Draw lines of various width</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="1000" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('DemoCanvas');
+        var count = 1;
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            var count = 1;
+            for (i = 0; i < 360; i += 30) {
+                ctx.beginPath();
+                ctx.lineWidth = count;
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+                count += 2;
+            }
+        } 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="demo" width="300px" height="200px" style="border: 1px solid blue">Trinh duyet cua ban khong ho
+        tro</canvas>
+</body>
+<script>
+    let g = document.getElementById("demo");
+    let v = g.getContext("2d");
+    //Ve duong thang
+    // v.moveTo(0,0);
+    // v.lineTo(150,100);
+    // v.stroke();
+
+
+    //Ve hinh tron
+    // v.beginPath();
+    // v.arc(150,100,80,0,2*Math.PI);
+    // v.stroke();
+
+    //Ve chu
+    // v.font = "20px Arial";
+    // v.fillText("Hello ca nha", 70, 100);
+
+    //Ve chu
+    // v.font = "30px Arial";
+    // v.strokeText("Hello ca nha", 70, 100);
+
+    //Hieu ung Gradient
+    // let grd = v.createLinearGradient(0,0,200,0);
+    // grd.addColorStop(0,"red");
+    // grd.addColorStop(1,"blue");
+    // v.fillStyle = grd;
+    // v.fillRect(0, 0, 150, 80);
+
+    //Hieu ung Gradient tron
+    let grd = v.createRadialGradient(75,50,5,90,60,100);
+    grd.addColorStop(0,"red");
+    grd.addColorStop(1,"blue");
+
+    v.fillStyle = grd;
+    v.fillRect(30,40, 150, 80);
+
+</script>
+
+</html>

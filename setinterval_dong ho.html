@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p>
+        Thời gian sẽ được cập nhật sau mỗi giây
+    </p>
+    <p id="demo"></p>
+
+    <script>
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+            var d = new Date();
+            var t = d.toLocaleTimeString();
+            document.getElementById("demo").innerHTML = t;
+        }
+    </script>
+
+</body>
+
+</html>

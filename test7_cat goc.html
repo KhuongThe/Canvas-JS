@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Line Joining</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('DemoCanvas');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            var lStart = 50;
+            var lEnd = 200;
+            var yStart = 20;
+
+            ctx.beginPath();
+            ctx.lineWidth = 25;
+            // Use a bevel corner.
+            ctx.lineJoin = "bevel";
+            ctx.moveTo(50, 20);
+            ctx.lineTo(150, 20);
+            ctx.lineTo(150, 120);
+            ctx.stroke();
+
+            // Use a round corner.             
+            ctx.beginPath();
+            ctx.lineJoin = "round";
+            ctx.moveTo(50, 140);
+            ctx.lineTo(150, 140);
+            ctx.lineTo(150, 260);
+            ctx.stroke();
+            
+            // Use a miter.      
+            ctx.beginPath();
+            ctx.lineJoin = "miter";
+            ctx.moveTo(50, 280);
+            ctx.lineTo(150, 280);
+            ctx.lineTo(150, 400);
+            ctx.stroke();
+        }
+    </script>
+</body>
+
+</html>

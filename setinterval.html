@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p>
+        Sau khi click vào nút, hộp thoại thông báo sẽ xuất hiện sau mỗi 3 giây.
+    </p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setInterval(alertFunc, 3000);
+        }
+
+        function alertFunc() {
+            alert("Hello!");
+        }
+    </script>
+
+</body>
+
+</html>

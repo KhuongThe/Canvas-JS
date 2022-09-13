@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="game" width="1200px" height="600px" style="border: 1px solid blue"></canvas>
+</body>
+<script>
+    let topgame = 200;
+    let bottomgame = 600;
+    let leftgame = 200;
+    let rightgame = 1200;
+    function getRandomHex() {
+        return Math.floor(Math.random() * 255); //Tao mã màu random
+    }
+    function getRandomColor() {
+        let red = getRandomHex();
+        let blue = getRandomHex();
+        let yerlow = getRandomHex();
+        return "rgb(" + red + "," + blue + "," + yerlow + ")"; //ket hop tao mã màu rgb random
+    }
+
+    function Circle() {
+        // this.x = Math.floor(Math.random() * window.innerWidth);
+        // this.y = Math.floor(Math.random() * window.innerHeight);
+        this.x = 600;
+        this.y = 300;
+    }
+    circle = new Circle();
+    let radius = 100;
+    function creatCircle() {
+            let color = getRandomColor();
+            // let radius = Math.floor(Math.random() * 100); //tao ban kinh ngau nhien
+            
+            
+            let drawCircle = document.getElementById("game");
+            let ctx = drawCircle.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+        }
+    let XDistance = 40;
+    let YDistance = 10;
+    function moveCircle() {
+        let touchtop = circle.y + radius < topgame;
+        let touchright = circle.x + radius > rightgame;
+        let touchbottom = circle.y + radius > bottomgame;
+        let touchleft =  circle.x + radius < leftgame;
+        if (touchtop || touchbottom || touchright || touchleft) {
+            YDistance = -YDistance;  //Dau tien tang dan đen 401, sau do giam dan xuong -1 thì -yDistance lai bang + 1
+            XDistance = -XDistance;
+        }
+
+        circle.x += XDistance;
+        circle.y += YDistance;
+        creatCircle();
+        
+    }
+    
+    setInterval(moveCircle, 300);
+ 
+
+</script>
+
+</html>

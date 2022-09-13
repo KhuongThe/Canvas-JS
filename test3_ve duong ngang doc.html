@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Draw a line</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('DemoCanvas');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            for (i = 10; i < 200; i += 20) {
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+            for (i = 10; i < 200; i += 20) {
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
+        } 
+    </script>
+</body>
+
+</html>

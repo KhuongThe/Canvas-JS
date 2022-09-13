@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Line Cap</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById('DemoCanvas');
+        if (canvas.getContext) {
+            var context = canvas.getContext("2d");
+            // butt line cap (first line)
+            context.beginPath();
+            context.moveTo(20, 20);
+            context.lineTo(20, 200);
+            context.lineWidth = 25;
+            context.strokeStyle = '#ff0000';
+            context.lineCap = 'butt';
+            context.stroke();
+
+            // round line cap (second line)
+            context.beginPath();
+            context.moveTo(80, 20);
+            context.lineTo(80, 200);
+            context.lineWidth = 25;
+            context.strokeStyle = '#ff0000';
+            context.lineCap = 'round';
+            context.stroke();
+
+            // square line cap (third line)
+            context.beginPath();
+            context.moveTo(120, 20);
+            context.lineTo(120, 200);
+            context.lineWidth = 25;
+            context.strokeStyle = '#ff0000';
+            context.lineCap = 'square';
+            context.stroke();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rectangle example</title>
+</head>
+
+<body>
+    <canvas id="DemoCanvas" width="500" height="600"></canvas>
+    <script>
+        var canvas = document.getElementById("DemoCanvas");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'green';    // color of fill
+            var y = 40, h = 300, w = 260;
+            for (var x = 10; x != 140; x = x + 10) {
+                ctx.fillRect(x, y, h, w);
+                ctx.clearRect(x + 5, y + 5, h - 10, w - 10);
+                y = y + 10;
+                h = h - 20;
+                w = w - 20;
+            }
+        }
+    </script>
+</body>
+
+</html>
